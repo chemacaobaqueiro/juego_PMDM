@@ -1,6 +1,8 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,15 +20,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.theme.Colores
 import com.example.myapplication.ui.theme.MyApplicationTheme
+import org.w3c.dom.Text
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val Text = "Pruebita perri"
+        val duracion = Toast.LENGTH_SHORT
+        Toast.makeText(this, Text, duracion).show()
+
         setContent {
             MyApplicationTheme {
                 Login()
@@ -38,7 +47,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Login() {
     val buttonPressed = remember { mutableStateOf("") }
-
     val buttons = listOf(Colores.Amarillo,Colores.Azul,Colores.Rojo,Colores.Verde)
     var record = remember { mutableStateOf<Int>(0) }
     var datos= remember { mutableListOf<Int>()}
@@ -65,7 +73,6 @@ fun Login() {
                     .size(120.dp, 120.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = buttons[0].color)
             ) {
-
             }
 
             Button(
@@ -108,6 +115,8 @@ fun Login() {
                 colors = ButtonDefaults.buttonColors(containerColor = buttons[3].color)
             ) {
             }
+
+
         }
 
         Text(
@@ -121,6 +130,15 @@ fun Login() {
     }
 }
 
+@Composable
+fun showToast() {
+    var secuencia = mutableListOf<Int>()
+    secuencia += (1..4).shuffled().take(5)
+    var textosecuencia = secuencia.toString()
+    val duracion = Toast.LENGTH_LONG
+    val context = LocalContext.current
+    Toast.makeText(context, textosecuencia, duracion).show()
+}
 @Preview(showBackground = true)
 @Composable
 fun ColorButtonsPreview() {
