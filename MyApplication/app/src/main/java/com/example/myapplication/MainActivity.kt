@@ -43,102 +43,126 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
-fun Login() {
-    val buttonPressed = remember { mutableStateOf("") }
-    val buttons = listOf(Colores.Amarillo,Colores.Azul,Colores.Rojo,Colores.Verde)
-    var record = remember { mutableStateOf<Int>(0) }
-    var datos= remember { mutableListOf<Int>()}
+fun botones(coloresBotones: MutableList<Int>){
+    val listaColor = listOf(Color.Red,Color.Green)
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Button(
-                onClick = {
-                    record.value++
-                    datos.add(buttons[0].valorcolor)
-                    },
-                modifier = Modifier
-                    .padding(3.dp)
-                    .size(120.dp, 120.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = buttons[0].color)
-            ) {
-            }
-
-            Button(
-                onClick = {
-                    record.value++
-                    datos.add(buttons[1].valorcolor)
-                     },
-                modifier = Modifier
-                    .padding(3.dp)
-                    .size(120.dp, 120.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = buttons[1].color)
-            ) {
-            }
-        }
-
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Button(
-                onClick = {
-                    record.value++
-                    datos.add(buttons[2].valorcolor)
-                    },
-                modifier = Modifier
-                    .padding(3.dp)
-                    .size(120.dp, 120.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = buttons[2].color)
-            ) {
-            }
-
-            Button(
-                onClick = {
-                    record.value++
-                    datos.add(buttons[3].valorcolor) },
-                modifier = Modifier
-                    .padding(3.dp)
-                    .size(120.dp, 120.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = buttons[3].color)
-            ) {
-            }
-
+    @Composable
+    fun crearBotones(color:Color,colorValor: Int){
+        Button(
+            onclick = {coloresBotones.add(colorValor)},
+            colors = ButtonDefaults.buttonColors(containerColor = color),
+            modifier = Modifier
+                .clip(CircleShape)
+                .padding(3.dp)
+                .size(95.dp)
+        ){
 
         }
 
-        Text(
-            text = buttonPressed.value,
-            modifier = Modifier.padding(top = 16.dp)
-        )
-        Text(
-            text = "Record: ${record.value}",
-            modifier = Modifier.padding(top = 16.dp)
-        )
+    }
+
+    for (color in listaColor){
+        when (color){
+            Color.Red -> crearBotones(color,Colores.ROJO.valorcolor)
+            Color.Green -> crearBotones(color,Colores.AZUL.valorcolor)
+
+        }
     }
 }
 
 @Composable
-fun showToast() {
-    var secuencia = mutableListOf<Int>()
-    secuencia += (1..4).shuffled().take(5)
-    var textosecuencia = secuencia.toString()
-    val duracion = Toast.LENGTH_LONG
-    val context = LocalContext.current
-    Toast.makeText(context, textosecuencia, duracion).show()
+fun botones2(coloresBotones: MutableList<Int>){
+    val listaColor = listOf(Color.Blue,Color.Yellow)
+
+    @Composable
+    fun crearBotones(color:Color,colorValor: Int){
+        Button(
+            onclick = {coloresBotones.add(colorValor)},
+            colors = ButtonDefaults.buttonColors(containerColor = color),
+            modifier = Modifier
+                .clip(CircleShape)
+                .padding(3.dp)
+                .size(95.dp)
+        ){
+
+        }
+
+    }
+
+    for (color in listaColor){
+        when (color){
+            Color.Blue -> crearBotones(color,Colores.VERDE.valorcolor)
+            Color.Yellow -> crearBotones(color,Colores.AMARILLO.valorcolor)
+        }
+    }
 }
+
+@Composable
+fun myApp(viewModel: MyViewModel) {
+    var lista_colores = remember { mutableStateListOf<Int>() }
+    val isStartButtonPressed = remember { mutableStateOf(true) }
+    var presioneStart = remember { mutableStateOf(false) }
+
+
+    Box (modifier = Modifier
+        .fillMaxSize()
+    ){
+
+        Column {
+            RecordMaximo(viewModel.getMaxRecord())
+            initialText(viewModel.getSaludoInicio())
+            showRecord(viewModel.getRecord())
+        }
+
+
+        Column(
+
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(70.dp)
+                .padding(top = 190.dp, start = 15.dp)
+        ) {
+
+            Row {
+
+                botones(lista_colores)
+            }
+
+            Row {
+                botones2(lista_colores)
+            }
+
+            showRondas(viewModel.getRondas())
+
+            startGame(isStartButtonPressed, presioneStart1 = presioneStart, viewModel = viewModel)
+
+
+            if(lista_colores.size == 3){
+
+                game(viewModel, lista_colores)
+
+            }
+
+
+        }
+    }
+
+}
+
+@Composable
+fun showRondas(Ronda: Int) {
+    Text(
+        text = "Ronda : $Ronda",
+
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        modifier = Modifier
+            .padding(top.100.dp)
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun ColorButtonsPreview() {
