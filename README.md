@@ -15,11 +15,11 @@
 
   ***Segundo objetivo***
   
-  -Las primeras funcionalidades del programa tampoco serán tan complejas
-       - Primero tenemos que crear una clase enum en la cual pondremos los colores de cada botón y le adjudicaremos un número para posteriormente compararlo con una secuencia
-       - Segundo creamos una función la cual genere un número aleatorio de todos los adjudicados al boton al pulsar el botón start
-       - Tercero guardamos este numero generado en una lista que va a ser la secuencia que tendremos que seguir para ganar la ronda
-       - Cuarto tenemos que crear otra función que compare si el numero introducido por el usuario se corresponde con el generado
+  - Las primeras funcionalidades del programa tampoco serán tan complejas
+      - Primero tenemos que crear una clase enum en la cual pondremos los colores de cada botón y le adjudicaremos un número para posteriormente compararlo con una secuencia
+      - Segundo creamos una función la cual genere un número aleatorio de todos los adjudicados al boton al pulsar el botón start
+      - Tercero guardamos este numero generado en una lista que va a ser la secuencia que tendremos que seguir para ganar la ronda
+      - Cuarto tenemos que crear otra función que compare si el numero introducido por el usuario se corresponde con el generado
 
 
   ***Tercer objetivo***
