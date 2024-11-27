@@ -32,6 +32,8 @@ fun showText(text: String, fontSize: Int, fontWeight: FontWeight, modifier: Modi
     )
 }
 
+//Muestra los aciertos actuales
+
 @Composable
 fun showAciertos(aciertos: Int) {
     Column(
@@ -49,6 +51,8 @@ fun showAciertos(aciertos: Int) {
     }
 }
 
+//Muestra el record actual
+
 @Composable
 fun RecordMaximo(record: Int) {
     Column(
@@ -64,6 +68,15 @@ fun RecordMaximo(record: Int) {
         )
     }
 }
+
+/**
+ * Botón de color específico que interactúa con el estado de la aplicación.
+ * @param viewModel Instancia de ViewModel para manejar la lógica del juego.
+ * @param listaColores Lista de colores seleccionados por el usuario.
+ * @param listaRandom Lista generada aleatoriamente para el patrón del juego.
+ * @param colorValor Valor asociado al color del botón.
+ * @param color Color que se mostrará en el botón.
+ */
 
 @Composable
 fun buttonColor(
@@ -91,6 +104,10 @@ fun buttonColor(
     ) { /* Botón vacío */ }
 }
 
+/**
+ * Muestra el número de rondas actuales del usuario.
+ * @param numeroRondas El número actual de rondas completadas.
+ */
 @Composable
 fun showRondas(numeroRondas: Int) {
     showText(
@@ -100,6 +117,11 @@ fun showRondas(numeroRondas: Int) {
         modifier = Modifier.padding(top = 100.dp)
     )
 }
+
+/**
+ * Botón de inicio para empezar el juego.
+ * @param viewModel Instancia de ViewModel para manejar la lógica del juego.
+ */
 
 @Composable
 fun showButtonStart(viewModel: MyViewModel) {
@@ -134,6 +156,12 @@ fun showButtonStart(viewModel: MyViewModel) {
         }
     }
 }
+
+
+/**
+ * Pantalla principal de la aplicación.
+ * @param viewModel Instancia de ViewModel para manejar la lógica del juego.
+ */
 
 @Composable
 fun gameButtons(viewModel: MyViewModel, listaColores: MutableList<Int>) {
